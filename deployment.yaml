@@ -1,0 +1,37 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: abc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: abc
+  template:
+    metadata:
+      labels:
+        app: abc
+    spec:
+      containers:
+        - name: abc
+          image: abc
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+      restartPolicy: Always
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: abc
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      nodePort: 32000
+  selector:
+    app: abc

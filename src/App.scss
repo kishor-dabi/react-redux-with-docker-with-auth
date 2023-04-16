@@ -1,0 +1,49 @@
+
+html {
+  font-size: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
+    sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+button:disabled {
+  opacity: 0.5;
+}
+
+thead {
+  font-family: 'Open Sans',sans-serif !important;
+    /* font-weight: 800!important; */
+    text-transform: uppercase;
+    font-size: 10px;
+    line-height: 16px;
+    letter-spacing: 1.5px;
+    color: #5e5454;
+}
+
+tbody > tr {
+  border-width: 0;
+  border-bottom-width: 1px;
+  border-style: solid;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.menu-open{
+  margin-left: 250px
+}
+
+.menu-close{
+  margin-left: 70px
+}
+
+.login-form{
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 25px;
+}
