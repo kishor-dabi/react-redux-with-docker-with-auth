@@ -1,23 +1,23 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: abc
+  name: react-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: abc
+      app: react-app
   template:
     metadata:
       labels:
-        app: abc
+        app: react-app
     spec:
       containers:
-        - name: abc
-          image: abc
-          imagePullPolicy: Never
-          ports:
-            - containerPort: 80
+        - name: react-app
+          image: kishordabi/react-app
+          # imagePullPolicy: Always
+          # ports:
+          #   - containerPort: 80
       restartPolicy: Always
 
 ---
@@ -25,13 +25,15 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: abc
+  name: react-app
 spec:
   type: NodePort
   ports:
     - port: 80
       targetPort: 80
       protocol: TCP
-      nodePort: 32000
+      nodePort: 32001
   selector:
-    app: abc
+    app: react-app
+    
+    

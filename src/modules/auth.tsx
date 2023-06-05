@@ -86,7 +86,7 @@ export default (state = initialState, action: any) => {
     case USER_LIST_Success:
       return {
         ...state,
-        userList: action.data ? action.data : []
+        userList: action.data?.user ? action.data.user : []
       }
 
     default:
@@ -129,6 +129,7 @@ export const refreshTokenUserData = (data: any) => {
 };
 
 export const checkAPISuccess = (response: any, dispatch: any) => {
+console.log(response, "----------------users");
 
   return (dispatch: any) => {
     let data = {
@@ -171,7 +172,8 @@ export const getUserList = (data: any) => {
       data
     })
       .then(function (response: any) {
-
+        console.log(response);
+        
         dispatch({
           type: USER_LIST_Success,
           data: response.data

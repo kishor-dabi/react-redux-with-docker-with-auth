@@ -53,7 +53,7 @@ docker build -f Dockerfile -t <app-name> .
 
 ## Docker run
 
-docker run -it -p 4001:3000 <app-name>
+docker run -it -p <4001:3000>  <app-name>  // expose ports
 
 
 
@@ -64,3 +64,29 @@ https://kubernetes.io/docs/tutorials/hello-minikube/
 
 
 minikube dashboard
+
+local 
+
+minikube docker-env
+
+docker build -f Dockerfile -t <app-name> .
+
+docker run -it -p 4001:3000 react-app
+
+docker tag <app name> <kubernate-user>/<tag>
+
+kubectl apply -f deployment.yaml
+
+
+kubectl get pods
+---------------- cmd------------------
+
+kubectl delete service,deployment <app-name>
+
+kubectl get deployment
+
+kubectl get service
+
+kubectl describe pod <app-name>
+
+---------------- cmd------------------

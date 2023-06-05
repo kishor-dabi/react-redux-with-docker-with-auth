@@ -93,6 +93,8 @@ export const Sidebar = (props: any) => {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
+    console.log(props.routeLink);
+    
     const handleDrawerClose = () => {
         console.log({ open });
 

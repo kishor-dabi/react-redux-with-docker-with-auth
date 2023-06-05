@@ -8,6 +8,7 @@ import About from './about';
 // import { Unauthorized } from '../Unauthorized'
 import { Sidebar } from '../components/sidebar';
 import Home from './home';
+import Users from "./users";
 
 export const _routes: any = [
     {
@@ -20,6 +21,15 @@ export const _routes: any = [
         icon: 'home'
     },
 
+    {
+        title: 'Users',
+        route: '/users',
+        key: "users._key",
+        display: true,
+        hasChild: false,
+        component: Users,
+        icon: 'group'
+    },
     {
         title: 'ABOUT',
         route: '/about-us',
@@ -79,6 +89,7 @@ export const ProtectedContainer = (props: any) => {
                     <Routes>
                         <Route exact path='/about-us' {...props} element={<About />} />
                         <Route exact {...props} path="/home" element={<Home />} />
+                        <Route exact {...props} path="/users" element={<Users />} />
                         <Route
                         path="*"
                         element={<h1 className="text-9xl font-bold">Not found!</h1>}
