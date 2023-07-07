@@ -12,6 +12,8 @@ import {
 
 // import history from "./../../utility/history";
 import { Link, useNavigate } from 'react-router-dom'
+import { Table } from '../../components/Table'
+import { ColumnDef } from '@tanstack/react-table'
 
 function changePage(props: any) {
   // const navigate = useNavigate();
@@ -52,10 +54,63 @@ function Home(props: any) {
     props.getUserList()
 
   }, [])
+  const columns: ColumnDef<any>[] = [
+        
+    {
+        id: 'user_id',
+        header: 'ID',
+        accessorKey: 'id',
+        // cell: ({ row }) => RenderImageWizard({ row, accessorKey: 'name', className: "" }),
+        enableSorting: false
+    },
+    {
+        accessorKey: 'name',
+        header: () => 'Name',
+        footer: (info:any) => info.column.id,
+    },
+    {
+        accessorKey: 'email',
+        footer: (info:any) => info.column.id,
+        header: () => "Email"
+    },
+    
+    {
+        accessorKey: 'phone_number',
+        footer: (info:any) => info.column.id,
+        header: () => "Phone"
+    },
+    
+    {
+        id: 'actions',
+        header: 'ACTIONS',
+        cell: ({ row }) => {
+            <>
+                edit <br />
+                delete
+            </>
+        },
+    },
+
+]
+
+const changePageIndex = (data:any) =>{
+  console.log(data)
+}
+
 
   return <div>
     <h1>Home</h1>
 
+
+
+    <Table
+    data={ props.userList/* {data: data, pageCount: 10, isFetching: false} */ }
+    pageCount={1}
+    isFetching={false}
+    columnDef={columns}
+    pageState={changePageIndex}
+
+/>
 
     {/* <p>Count: {props.count}</p>
 
@@ -80,7 +135,7 @@ function Home(props: any) {
     </p> */}
 
 
-    <table>
+    {/* <table>
       <thead>
         <tr>
           <th>#</th>
@@ -90,26 +145,10 @@ function Home(props: any) {
         </tr>
       </thead>
       <tbody>
-        {/* <tr>
-      <td>1</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td colSpan={2}>Larry the Bird</td>
-      <td>@twitter</td>
-    </tr> */}
+      
         <RenderuserList {...props} />
       </tbody>
-    </table>
+    </table> */}
   </div>
 }
 
