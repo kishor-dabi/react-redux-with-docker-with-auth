@@ -9,6 +9,7 @@ import About from './about';
 import { Sidebar } from '../components/sidebar';
 import Home from './home';
 import Users from "./users";
+import NotFound from "./NotFound";
 
 export const _routes: any = [
     {
@@ -92,7 +93,7 @@ export const ProtectedContainer = (props: any) => {
                         <Route exact {...props} path="/users" element={<Users />} />
                         <Route
                         path="*"
-                        element={<h1 className="text-9xl font-bold">Not found!</h1>}
+                        element={<NotFound/>}
                     />
                     </Routes>
                 </div>
