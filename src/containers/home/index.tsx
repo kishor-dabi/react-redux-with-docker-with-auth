@@ -97,6 +97,11 @@ const changePageIndex = (data:any) =>{
   console.log(data)
 }
 
+const setSorting = (e:any) =>{
+  console.log(e);
+  
+}
+
 
   return <div>
     <h1>Home</h1>
@@ -109,6 +114,7 @@ const changePageIndex = (data:any) =>{
     isFetching={false}
     columnDef={columns}
     pageState={changePageIndex}
+    onSorting={setSorting}
 
 />
 

@@ -6,10 +6,15 @@ import {
   getCoreRowModel,
   ColumnDef,
   flexRender,
+  SortingState,
 } from '@tanstack/react-table'
 
+//
 
-export function Table(data: { data: any, isFetching: any, pageCount: any, columnDef: ColumnDef<any>[], pageState: any } ) {
+// //   import { fetchData, Person } from './fetchData'
+
+
+export function Table(data: { data: any, isFetching: any, pageCount: any, columnDef: ColumnDef<any>[], pageState: any, onSorting:any,/* sortingState:any */} ) {
   const rerender = React.useReducer(() => ({}), {})[1]
 
 
@@ -18,6 +23,8 @@ export function Table(data: { data: any, isFetching: any, pageCount: any, column
       pageIndex: 0,
       pageSize: 10,
     })
+    const [sorting, setSorting] = React.useState<SortingState>([])
+
 
   // const fetchDataOptions = {
   //   pageIndex,
@@ -44,13 +51,30 @@ export function Table(data: { data: any, isFetching: any, pageCount: any, column
     pageState({ pageIndex, pageSize })
   },[pageIndex, pageSize])
 
+
+  
+  useEffect(() => {
+    const { onSorting } = data;
+    let sort: any = null
+    if (sorting?.[0]?.id) {
+        sort = {
+            id: sorting?.[0]?.id,
+            desc: sorting?.[0]?.desc
+        }
+    }
+    onSorting(sort)
+  } , [data, sorting])
+
+
   const table = useReactTable({
     data: data.data ?? defaultData,
     columns: data.columnDef,
     pageCount: data.pageCount ?? -1,
     state: {
       pagination,
+      sorting: sorting,
     },
+    onSortingChange:setSorting,
     onPaginationChange: setPagination,
     getCoreRowModel: getCoreRowModel(),
     manualPagination: true,
@@ -69,11 +93,22 @@ export function Table(data: { data: any, isFetching: any, pageCount: any, column
                 return (
                   <th key={header.id} colSpan={header.colSpan}>
                     {header.isPlaceholder ? null : (
-                      <div>
+                      <div
+                      {...{
+                        className: header.column.getCanSort()
+                          ? 'cursor-pointer select-none'
+                          : '',
+                        onClick: header.column.getToggleSortingHandler(),
+                      }}
+                      >
                         {flexRender(
                           header.column.columnDef.header,
                           header.getContext()
                         )}
+                        {{
+                          asc: ' 🔼',
+                          desc: ' 🔽',
+                        }[header.column.getIsSorted() as string] ?? null}
                       </div>
                     )}
                   </th>
@@ -166,9 +201,7 @@ export function Table(data: { data: any, isFetching: any, pageCount: any, column
         {data.isFetching ? 'Loading...' : null}
       </div>
       {/* <div>{table.getRowModel().rows.length} Rows</div> */}
-      <div>
-      </div>
-    
+
     </div>
   )
 }
