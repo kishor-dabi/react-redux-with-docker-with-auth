@@ -8,6 +8,8 @@ import {
   flexRender,
   SortingState,
 } from '@tanstack/react-table'
+import { Accordion } from "react-bootstrap";
+import { Expandable } from "./table-expandable";
 
 //
 
@@ -136,6 +138,34 @@ export function Table(data: { data: any, isFetching: any, pageCount: any, column
           })}
         </tbody>
       </table>
+
+      <div className='overflow-auto w-full h-[calc(100vh-220px)] rounded-md'>
+           
+           <>
+             {table.getRowModel().rows?.length ? table.getRowModel().rows.map((row, index) => (
+               <div key={index} className="bg-white text-gray-700 dark:text-gray-200 dark:bg-slate-800 border-b dark:border-b-0 hover:bg-gray-100 dark:hover:bg-slate-700">
+                 {row.getVisibleCells().map((cell, i) => (
+                   <>
+                             <Accordion defaultActiveKey="0">
+
+                   <Expandable key={i} row={row} getHeaderGroups={table.getHeaderGroups()} />
+                   </Accordion>
+                   </>
+                 ))}
+               </div>
+             )) : (
+
+               <div>
+                   <div className="p-4 text-sm text-gray-700 dark:text-gray-200 dark:bg-slate-700 bg-gray-100 text-center " role="alert">
+                     <span className="font-medium">No records found !</span> Try removing filters if applied.
+                   </div>
+               </div>
+
+             )}
+
+           </>
+
+       </div>
 
       <div className="h-2" />
       <div className="flex items-center gap-2">
