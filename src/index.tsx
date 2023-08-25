@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import * as History from 'history';
 import { Provider } from "react-redux";
 import { applyMiddleware, combineReducers, compose, legacy_createStore as createStore } from "redux";
-import { reducer as form } from 'redux-form';
+// import { reducer as formReducer } from 'redux-form';
 import thunk from "redux-thunk";
 import "./App.scss";
 import rootReducerObj from './modules';
@@ -43,7 +43,7 @@ const rootReducer = combineReducers({
   // doctorsList: doctors_list,
   // payment: paymentReducer,
 
-  form: form
+  // form: formReducer
 
 });
 

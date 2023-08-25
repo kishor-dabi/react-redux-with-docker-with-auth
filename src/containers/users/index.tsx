@@ -11,22 +11,22 @@ import { CustomTable } from '../../components/customTable';
 
 
 
-let RenderuserList = ({ userList }: any) => {
-  let list = userList.map((list: any, i: any) => {
-    return (
+// let RenderuserList = ({ userList }: any) => {
+//   let list = userList.map((list: any, i: any) => {
+//     return (
 
-      <tr key={i}>
-        <td>{list.user_id}</td>
-        <td>{list.full_name}</td>
-        <td>{list.email}</td>
-        <td>{list.phone_number}</td>
-      </tr>
+//       <tr key={i}>
+//         <td>{list.user_id}</td>
+//         <td>{list.full_name}</td>
+//         <td>{list.email}</td>
+//         <td>{list.phone_number}</td>
+//       </tr>
 
-    )
-  })
+//     )
+//   })
 
-  return list
-}
+//   return list
+// }
 
 function Users(props: any) {
   let navigateTo = useNavigate();
@@ -85,7 +85,7 @@ function Users(props: any) {
   return <div>
     <h1>Users</h1>
 
-{JSON.stringify({querySortOptions, queryOptions})}
+{/* {JSON.stringify({querySortOptions, queryOptions})} */}
 
     <div style={{ height: 400, width: '100%' }}>
       <CustomTable data={props.userList}
@@ -99,7 +99,7 @@ function Users(props: any) {
         disableColumnFilter ={true}
         disableDensitySelector={true}
         disableColumnSelector={true}
-        rowCount={1000}
+        rowCount={props.totalCount ? props.totalCount :props.userList?.length}
         handleCallBack={filterChange}
       />
       {/* <DataGrid

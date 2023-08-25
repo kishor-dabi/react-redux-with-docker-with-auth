@@ -139,7 +139,7 @@ export function Table(data: { data: any, isFetching: any, pageCount: any, column
         </tbody>
       </table>
 
-      <div className='overflow-auto w-full h-[calc(100vh-220px)] rounded-md'>
+      {/* <div className='overflow-auto w-full h-[calc(100vh-220px)] rounded-md'>
            
            <>
              {table.getRowModel().rows?.length ? table.getRowModel().rows.map((row, index) => (
@@ -165,7 +165,7 @@ export function Table(data: { data: any, isFetching: any, pageCount: any, column
 
            </>
 
-       </div>
+       </div> */}
 
       <div className="h-2" />
       <div className="flex items-center gap-2">

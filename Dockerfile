@@ -68,16 +68,18 @@
 # Name the node stage "builder"
 FROM node:latest as builder
 RUN echo "base"
-WORKDIR /usr/src/app
+WORKDIR /app
 COPY package.json ./
-COPY package-lock.json ./
+# COPY package-lock.json ./
 COPY . .
-RUN npm i
+# CMD ["npm", "run", "build"]
+
+RUN npm i -f
 # CMD ["npm", "run", "start"]
 
 
 # Build the project and copy the files
-# RUN npm run build
+RUN npm run build
 CMD ["npm", "run", "build"]
 
 
@@ -92,7 +94,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 ## Remove default nginx index page
 RUN rm -rf /usr/share/nginx/html/*
 
-COPY --from=builder /usr/src/app/build /usr/share/nginx/html
+COPY --from=builder /app/build /usr/share/nginx/html
 
 
 EXPOSE 3000 80
